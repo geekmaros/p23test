@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import attendanceIcon from '@/assets/icons/attendance.svg'
 import crmIcon from '@/assets/icons/crm.svg'
 import overviewIcon from '@/assets/icons/overview.svg'
@@ -15,10 +17,34 @@ const secondaryNav = [
   { label: 'Attendance', icon: attendanceIcon },
   { label: 'Users', icon: usersIcon },
 ]
+
+const rating = 4.5
+const maxRating = 5
+const clampedRating = computed(() => Math.min(Math.max(rating, 0), maxRating))
+const ratingLabel = computed(() => `${clampedRating.value.toFixed(1)}/${maxRating.toFixed(1)}`)
+
+const ringRadius = 68
+const ringCircumference = 2 * Math.PI * ringRadius
+const ringStrokeOffset = computed(
+  () => ringCircumference - (clampedRating.value / maxRating) * ringCircumference,
+)
+
+const customerInsight = computed(() => {
+  const value = clampedRating.value
+
+  if (value === 5) return 'Ideal Customer'
+  if (value >= 4) return 'Promising Customer'
+  if (value >= 3) return 'Growing Customer'
+  if (value >= 2) return 'Stable Customer'
+  if (value >= 1) return 'At-Risk Customer'
+  return 'Critical Customer'
+})
 </script>
 
 <template>
-  <aside class="relative overflow-hidden bg-[#021717] px-5 py-8 text-white xl:py-[72px]">
+  <aside
+    class="relative flex flex-col overflow-hidden bg-[#021717] px-5 py-8 text-white xl:sticky xl:top-0 xl:h-screen xl:pt-[72px]"
+  >
     <div
       class="mx-auto mb-10 flex items-center max-w-[160px] gap-2 xl:mx-0 xl:mb-[52px] xl:ml-[52px]"
     >
@@ -53,5 +79,63 @@ const secondaryNav = [
         <span>{{ item.label }}</span>
       </router-link>
     </nav>
+
+    <article
+      class="mx-auto mt-auto w-full max-w-[243px] rounded-[20px] bg-white px-5 py-5 text-[#34373C]"
+    >
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-sm text-[#34373C] font-medium">Customer metric</h3>
+          <p class="text-[10px] text-[#616263]">Overall Insight</p>
+        </div>
+        <span class="text-xl leading-none text-[#616263]">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 4L15.3306 10.0405C17.5565 11.6545 17.5565 12.3455 15.3306 13.9595L7 20"
+              stroke="#34373C"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
+
+      <div class="mt-4 flex flex-col items-center">
+        <p class="mb-1 text-[7px] text-[#616263]">{{ ratingLabel }}</p>
+        <div class="relative grid size-[150px] place-items-center">
+          <div
+            class="relative z-10 rounded-full bg-[linear-gradient(to_bottom,#F6F6F6,#38696B)] p-[3px]"
+          >
+            <img
+              src="@/assets/images/user.png"
+              alt="user avatar"
+              class="size-[108px] rounded-full object-cover bg-[#F9FFFF]"
+            />
+          </div>
+
+          <svg class="absolute inset-0 h-full w-full" viewBox="0 0 150 150" fill="none">
+            <circle
+              cx="75"
+              cy="75"
+              :r="ringRadius"
+              stroke="#FD654B"
+              stroke-width="2"
+              stroke-linecap="round"
+              :stroke-dasharray="ringCircumference"
+              :stroke-dashoffset="ringStrokeOffset"
+              transform="rotate(-90 75 75)"
+            />
+          </svg>
+        </div>
+        <p class="mt-2 text-[10px] font-medium text-[#616263]">{{ customerInsight }}</p>
+      </div>
+    </article>
   </aside>
 </template>
