@@ -28,6 +28,16 @@ const ringCircumference = 2 * Math.PI * ringRadius
 const ringStrokeOffset = computed(
   () => ringCircumference - (clampedRating.value / maxRating) * ringCircumference,
 )
+const ringMarker = computed(() => {
+  const progressAngle = -90 + (clampedRating.value / maxRating) * 360
+  const angleInRadians = (progressAngle * Math.PI) / 180
+  const center = 75
+
+  return {
+    x: center + ringRadius * Math.cos(angleInRadians),
+    y: center + ringRadius * Math.sin(angleInRadians),
+  }
+})
 
 const customerInsight = computed(() => {
   const value = clampedRating.value
@@ -132,6 +142,7 @@ const customerInsight = computed(() => {
               :stroke-dashoffset="ringStrokeOffset"
               transform="rotate(-90 75 75)"
             />
+            <circle :cx="ringMarker.x" :cy="ringMarker.y" r="4" fill="#FD654B" />
           </svg>
         </div>
         <p class="mt-2 text-[10px] font-medium text-[#616263]">{{ customerInsight }}</p>
