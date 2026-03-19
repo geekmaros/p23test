@@ -57,13 +57,13 @@ const customerInsight = computed(() => {
     class="relative flex flex-col overflow-hidden bg-[#021717] px-5 py-8 text-white xl:sticky xl:top-0 xl:h-screen xl:pt-[72px]"
   >
     <div
-      class="mx-auto mb-10 flex items-center max-w-[160px] gap-2 xl:mx-0 xl:mb-[52px] xl:ml-[52px]"
+      class="mx-auto flex items-center max-w-[160px] gap-2  mb-[52px] ml-[52px]"
     >
       <span class="size-[27px] rounded-full bg-white" />
       <span class="font-['Righteous'] text-2xl">Logo</span>
     </div>
 
-    <nav class="grid grid-cols-2 gap-2 xl:flex xl:flex-col xl:gap-[18px]">
+    <nav class=" grid-cols-2 gap-2 flex flex-col">
       <div class="top-nav-links pb-[17px] border-b border-[#6E8788]">
         <router-link
           v-for="item in primaryNav"
@@ -83,7 +83,7 @@ const customerInsight = computed(() => {
       <router-link
         v-for="item in secondaryNav"
         :key="item.label"
-        class="flex items-center gap-3 rounded-[20px] px-5 py-[11px] text-xs font-medium transition-colors duration-200 hover:bg-white/12 xl:ml-8"
+        class="flex items-center gap-3 rounded-[20px] px-5 py-[11px] text-xs font-medium transition-colors duration-200 hover:bg-white/12 ml-8"
         to="#"
       >
         <img :src="item.icon" :alt="`${item.label} icon`" class="size-5" />

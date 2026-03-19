@@ -90,9 +90,9 @@ onBeforeUnmount(() => {
 <template>
   <article
     ref="cardRef"
-    class="rounded-[20px] bg-[#021717] px-6 pt-5 pb-5 text-white shadow-[0_1px_7px_rgba(12,12,13,0.1)] lg:col-span-2"
+    class="rounded-[20px] bg-[#021717] px-6 pt-5 pb-5 text-white shadow-[0_1px_7px_rgba(12,12,13,0.1)] col-span-2"
   >
-    <div class="grid gap-5 lg:grid-cols-[1fr_292px] lg:items-start">
+    <div class="grid gap-5 grid-cols-[1fr_292px] items-start">
       <section>
         <h3 class="text-[14px] leading-none font-medium tracking-[-0.03em]">Weekly Tasks</h3>
 

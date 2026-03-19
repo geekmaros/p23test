@@ -22,7 +22,7 @@ const pipelineStages = [
 </script>
 
 <template>
-  <main class="px-4 py-6 sm:px-8 sm:py-10 xl:px-[52px] xl:py-12">
+  <main class="px-4 sm:px-8  xl:px-[52px] py-12">
     <AppHeader />
 
     <section class="grid gap-4 lg:grid-cols-3">

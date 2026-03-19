@@ -1,5 +1,5 @@
 <template>
-  <header class="mb-6 flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+  <header class="mb-6 flex  gap-3 flex-row items-center justify-between">
     <h1 class="text-[32px] font-bold text-primary">Dashboard</h1>
 
     <ul class="flex items-center gap-2.5">
