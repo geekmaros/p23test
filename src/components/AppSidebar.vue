@@ -92,7 +92,7 @@ const customerInsight = computed(() => {
     </nav>
 
     <article
-      class="mx-auto mt-auto w-full max-w-[243px] rounded-[20px] bg-white px-5 py-5 text-[#34373C]"
+      class="mx-auto mt-auto w-full mb-5 max-w-[243px] rounded-[20px] bg-white px-5 py-5 text-[#34373C]"
     >
       <div class="flex items-center justify-between">
         <div>
