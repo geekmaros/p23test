@@ -18,7 +18,13 @@
 
 
       <li class="flex items-center gap-2 p-2">
-        <img class="w-[38px] h-[38px] rounded-full aspect-square object-cover" src="@/assets/images/avatar.png" alt="">
+        <span class="relative size-[38px] overflow-hidden rounded-full bg-[#9099B6]">
+          <img
+            class="h-full w-full scale-[1.4] object-cover object-top translate-y-[8px]"
+            src="@/assets/images/avatar.png"
+            alt="user avatar"
+          >
+        </span>
         <div>
           <p class="text-[15px] leading-4 font-semibold text-primary">Full Name</p>
           <p class="mt-1 text-[10px] leading-3 font-light text-primary">username@gmail.com</p>

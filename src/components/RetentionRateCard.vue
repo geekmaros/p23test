@@ -122,9 +122,10 @@ onBeforeUnmount(() => {
           aria-hidden="true"
         >
           <defs>
-            <linearGradient id="retentionArc" x1="31" y1="93" x2="105" y2="21" gradientUnits="userSpaceOnUse">
+            <linearGradient id="retentionArc" x1="40.118" y1="98.944" x2="124.29" y2="20.814" gradientUnits="userSpaceOnUse">
               <stop stop-color="#021717" />
-              <stop offset="1" stop-color="#0B2A2A" />
+              <stop offset="0.3551" stop-color="#021717" />
+              <stop offset="0.7136" stop-color="#DFF4F5" />
             </linearGradient>
           </defs>
 

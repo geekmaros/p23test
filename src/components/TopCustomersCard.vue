@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import avatarImage from '@/assets/images/avatar.png'
-import userImage from '@/assets/images/user.png'
+import avatarImage from '@/assets/images/user1.png'
+import userImage from '@/assets/images/user2.png'
 
 type CustomerRange = 'Weekly' | 'Daily' | 'Monthly'
 
@@ -27,19 +27,19 @@ const rangeOptions: CustomerRange[] = ['Weekly', 'Daily', 'Monthly']
 
 const customerMetrics: Record<CustomerRange, CustomerMetric[]> = {
   Weekly: [
-    { label: 'Customer 1', color: '#021717', value: 92, radius: 66 },
-    { label: 'Customer 2', color: '#2F6FED', value: 78, radius: 52 },
-    { label: 'Customer 3', color: '#EB45DB', value: 64, radius: 38 },
+    { label: 'Customer 1', color: '#021717', value: 92, radius: 74 },
+    { label: 'Customer 2', color: '#146AFA', value: 78, radius: 54 },
+    { label: 'Customer 3', color: '#FD46E8', value: 64, radius: 34 },
   ],
   Daily: [
-    { label: 'Customer 1', color: '#021717', value: 74, radius: 66 },
-    { label: 'Customer 2', color: '#2F6FED', value: 62, radius: 52 },
-    { label: 'Customer 3', color: '#EB45DB', value: 49, radius: 38 },
+    { label: 'Customer 1', color: '#021717', value: 74, radius: 74 },
+    { label: 'Customer 2', color: '#146AFA', value: 62, radius: 54 },
+    { label: 'Customer 3', color: '#FD46E8', value: 49, radius: 34 },
   ],
   Monthly: [
-    { label: 'Customer 1', color: '#021717', value: 99, radius: 66 },
-    { label: 'Customer 2', color: '#2F6FED', value: 83, radius: 52 },
-    { label: 'Customer 3', color: '#EB45DB', value: 69, radius: 38 },
+    { label: 'Customer 1', color: '#021717', value: 99, radius: 74 },
+    { label: 'Customer 2', color: '#146AFA', value: 83, radius: 54 },
+    { label: 'Customer 3', color: '#FD46E8', value: 69, radius: 34 },
   ],
 }
 
@@ -232,17 +232,17 @@ onBeforeUnmount(() => {
                 cx="0"
                 cy="0"
                 :r="metric.radius"
-                stroke="#F1F3F5"
+                stroke="#F5F5F5"
                 stroke-width="16"
                 fill="none"
                 stroke-linecap="round"
-                stroke-dasharray="1 1000"
               />
               <circle
                 cx="0"
                 cy="0"
                 :r="metric.radius"
                 :stroke="metric.color"
+                class="customer-ring"
                 stroke-width="16"
                 fill="none"
                 stroke-linecap="round"
@@ -252,8 +252,8 @@ onBeforeUnmount(() => {
           </g>
         </svg>
 
-        <div class="absolute inset-[42px] rounded-full bg-[#F5F5F5]" />
-        <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[18px] font-semibold tracking-[-0.04em] text-[#171717]">
+        <div class="absolute inset-[73px] rounded-full bg-white" />
+        <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[18px]  font-semibold tracking-[-0.04em] text-[#171717]">
           {{ totalScore }}%
         </span>
       </div>
@@ -321,3 +321,9 @@ onBeforeUnmount(() => {
     </div>
   </article>
 </template>
+
+<style scoped>
+.customer-ring {
+  transition: stroke-dasharray 320ms ease;
+}
+</style>

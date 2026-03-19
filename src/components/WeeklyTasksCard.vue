@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import user1Image from '@/assets/images/user1.png'
+import user2Image from '@/assets/images/user2.png'
 
 type MeetingRange = 'Daily' | 'Weekly' | 'Monthly'
 
@@ -11,8 +13,7 @@ const meetingsByRange: Record<
     id: number
     name: string
     category: string
-    avatar: string
-    avatarBg: string
+    avatarSrc: string
   }>
 > = {
   Daily: [
@@ -20,15 +21,13 @@ const meetingsByRange: Record<
       id: 1,
       name: 'Lane Wade',
       category: 'E-commerce',
-      avatar: 'LW',
-      avatarBg: 'from-[#6479A4] via-[#A7B4DB] to-[#F4D1C3]',
+      avatarSrc: user1Image,
     },
     {
       id: 2,
       name: 'Lane Wade',
       category: 'E-commerce',
-      avatar: 'LW',
-      avatarBg: 'from-[#D78617] via-[#F0B348] to-[#F6D18A]',
+      avatarSrc: user2Image,
     },
   ],
   Weekly: [
@@ -36,15 +35,13 @@ const meetingsByRange: Record<
       id: 1,
       name: 'Mina Cole',
       category: 'Retail',
-      avatar: 'MC',
-      avatarBg: 'from-[#C39D62] via-[#EDC987] to-[#F2DFB4]',
+      avatarSrc: user1Image,
     },
     {
       id: 2,
       name: 'Tari Mensah',
       category: 'SaaS',
-      avatar: 'TM',
-      avatarBg: 'from-[#4C7C7E] via-[#8BBEC0] to-[#CFEDEE]',
+      avatarSrc: user2Image,
     },
   ],
   Monthly: [
@@ -52,15 +49,13 @@ const meetingsByRange: Record<
       id: 1,
       name: 'Lane Wade',
       category: 'E-commerce',
-      avatar: 'LW',
-      avatarBg: 'from-[#6479A4] via-[#A7B4DB] to-[#F4D1C3]',
+      avatarSrc: user1Image,
     },
     {
       id: 2,
       name: 'Tari Mensah',
       category: 'SaaS',
-      avatar: 'TM',
-      avatarBg: 'from-[#4C7C7E] via-[#8BBEC0] to-[#CFEDEE]',
+      avatarSrc: user2Image,
     },
   ],
 }
@@ -118,22 +113,41 @@ onBeforeUnmount(() => {
         <div
           class="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-[7px] text-[11px] font-medium text-[#1E2328]"
         >
-          <span class="grid size-6 place-items-center rounded-full border border-[#1E2328]">
+          <span class="grid size-6 place-items-center rounded-full ">
             <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2" />
-              <circle cx="4.8" cy="5.6" r="0.7" fill="currentColor" />
-              <circle cx="9.2" cy="5.6" r="0.7" fill="currentColor" />
               <path
-                d="M4.6 8.7C5.1 9.45 5.95 9.8 7 9.8C8.05 9.8 8.9 9.45 9.4 8.7"
-                stroke="currentColor"
-                stroke-width="1.2"
+                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                stroke="#021717"
+                stroke-width="1.5"
                 stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M16 9V9.01"
+                stroke="#021717"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8 9V9.01"
+                stroke="#021717"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8 14.5C8.91212 15.7144 10.3643 16.5 12 16.5C13.6357 16.5 15.0879 15.7144 16 14.5"
+                stroke="#021717"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </span>
@@ -141,10 +155,10 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-      <section class="rounded-[22px] bg-[#123B3D] px-4 pt-4 pb-3">
+      <section class="rounded-[22px] h-full flex flex-col px-4 ">
         <div class="flex items-start justify-between">
           <div>
-            <h4 class="text-[12px] leading-none font-medium text-white/95">Scheduled Meetings</h4>
+            <h4 class="text-[10px] leading-none text-white/95">Scheduled Meetings</h4>
           </div>
 
           <div class="relative">
@@ -189,19 +203,21 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-        <div class="mt-3 space-y-3">
+        <div class="mt-3 space-y-3 py-2 pl-[9px] pr-[6px] rounded-[20px] h-full bg-[#123B3D]">
           <div
             v-for="meeting in scheduledMeetings"
             :key="meeting.id"
             class="flex items-center justify-between rounded-[18px] bg-[#F9FFFF] px-3 py-2"
           >
             <div class="flex items-center gap-3">
-              <span class="grid size-[38px] place-items-center rounded-full bg-gradient-to-br text-[12px] font-semibold text-[#1B2428]" :class="meeting.avatarBg">
-                {{ meeting.avatar }}
-              </span>
+              <img
+                :src="meeting.avatarSrc"
+                :alt="meeting.name"
+                class="size-[38px] rounded-full object-cover"
+              />
 
               <div>
-                <p class="text-[14px] leading-none font-semibold tracking-[-0.03em] text-[#1E2328]">
+                <p class="text-[15px] leading-none font-semibold tracking-[-0.03em] text-[#1E2328]">
                   {{ meeting.name }}
                 </p>
                 <small class="mt-1 block text-[10px] leading-none text-[#6C7075]">
@@ -216,16 +232,11 @@ onBeforeUnmount(() => {
                 class="grid size-5 place-items-center rounded-full text-[#F0BBB1]"
                 :aria-label="`Decline meeting with ${meeting.name}`"
               >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1" />
-                  <path d="M4.8 4.8L9.2 9.2M9.2 4.8L4.8 9.2" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5C13.1421 16.5 16.5 13.1421 16.5 9Z" stroke="#F1CAC4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M11.2496 11.25L6.75 6.75M6.75048 11.25L11.25 6.75" stroke="#F1CAC4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
+
               </button>
 
               <button
@@ -233,16 +244,12 @@ onBeforeUnmount(() => {
                 class="grid size-5 place-items-center"
                 :aria-label="`Open video call for ${meeting.name}`"
               >
-                <svg
-                  width="16"
-                  height="12"
-                  viewBox="0 0 16 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect x="1" y="2" width="10" height="8" rx="2" stroke="currentColor" stroke-width="1.1" />
-                  <path d="M11 4.3L14.2 2.8V9.2L11 7.7V4.3Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round" />
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.25 6H9.75" stroke="#84A9E5" stroke-linecap="round"/>
+                  <path d="M1.5 8.25C1.5 5.77513 1.5 4.53769 2.26885 3.76885C3.03769 3 4.27513 3 6.75 3H7.5C9.97485 3 11.2123 3 11.9812 3.76885C12.75 4.53769 12.75 5.77513 12.75 8.25V9.75C12.75 12.2248 12.75 13.4623 11.9812 14.2312C11.2123 15 9.97485 15 7.5 15H6.75C4.27513 15 3.03769 15 2.26885 14.2312C1.5 13.4623 1.5 12.2248 1.5 9.75V8.25Z" stroke="#84A9E5"/>
+                  <path d="M12.75 6.67939L12.8444 6.60147C14.4313 5.29217 15.2247 4.63752 15.8623 4.95362C16.5 5.26971 16.5 6.31766 16.5 8.41358V9.58643C16.5 11.6824 16.5 12.7303 15.8623 13.0464C15.2247 13.3625 14.4313 12.7079 12.8444 11.3985L12.75 11.3206" stroke="#84A9E5" stroke-linecap="round"/>
                 </svg>
+
               </button>
             </div>
           </div>

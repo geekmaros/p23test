@@ -18,16 +18,17 @@ const secondaryNav = [
   { label: 'Users', icon: usersIcon },
 ]
 
-const rating = 4.5
+const rating = 4.0
 const maxRating = 5
 const clampedRating = computed(() => Math.min(Math.max(rating, 0), maxRating))
 const ratingLabel = computed(() => `${clampedRating.value.toFixed(1)}/${maxRating.toFixed(1)}`)
 
-const ringRadius = 68
+const ringRadius = 67
 const ringCircumference = 2 * Math.PI * ringRadius
 const ringStrokeOffset = computed(
   () => ringCircumference - (clampedRating.value / maxRating) * ringCircumference,
 )
+const ringGradientId = 'customer-ring-gradient'
 const ringMarker = computed(() => {
   const progressAngle = -90 + (clampedRating.value / maxRating) * 360
   const angleInRadians = (progressAngle * Math.PI) / 180
@@ -131,18 +132,33 @@ const customerInsight = computed(() => {
           </div>
 
           <svg class="absolute inset-0 h-full w-full" viewBox="0 0 150 150" fill="none">
+            <defs>
+              <linearGradient
+                :id="ringGradientId"
+                gradientUnits="objectBoundingBox"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="0"
+                gradientTransform="rotate(-45.22 0.5 0.5)"
+              >
+                <stop offset="21.57%" stop-color="#FD6046" />
+                <stop offset="80.46%" stop-color="#FFFFFF" />
+                <stop offset="80.46%" stop-color="#F3F3F3" />
+              </linearGradient>
+            </defs>
             <circle
               cx="75"
               cy="75"
               :r="ringRadius"
-              stroke="#FD654B"
+              :stroke="`url(#${ringGradientId})`"
               stroke-width="2"
               stroke-linecap="round"
               :stroke-dasharray="ringCircumference"
               :stroke-dashoffset="ringStrokeOffset"
               transform="rotate(-90 75 75)"
             />
-            <circle :cx="ringMarker.x" :cy="ringMarker.y" r="4" fill="#FD654B" />
+            <circle :cx="ringMarker.x" :cy="ringMarker.y" r="4" fill="#FD6046" />
           </svg>
         </div>
         <p class="mt-2 text-[10px] font-medium text-[#616263]">{{ customerInsight }}</p>
