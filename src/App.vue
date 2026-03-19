@@ -4,7 +4,7 @@ import AppSidebar from './components/AppSidebar.vue'
 </script>
 
 <template>
-  <div class="min-h-screen xl:grid xl:grid-cols-[267px_1fr]">
+  <div class="min-h-screen xl:grid grid-cols-[267px_1fr]">
     <AppSidebar />
     <AppMain />
   </div>
