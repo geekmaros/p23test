@@ -3,6 +3,20 @@ import AppHeader from './AppHeader.vue'
 
 const revenueDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 const revenueBars = [48, 90, 36, 100, 48, 90, 36]
+const pipelineStages = [
+  {
+    label: 'Contacted',
+    value: 70,
+    accent: '#021717',
+    stemHeight: 58,
+  },
+  {
+    label: 'Qualify',
+    value: 57,
+    accent: '#FD46E8',
+    stemHeight: 58,
+  },
+]
 </script>
 
 <template>
@@ -10,29 +24,56 @@ const revenueBars = [48, 90, 36, 100, 48, 90, 36]
     <AppHeader />
 
     <section class="grid gap-4 lg:grid-cols-3">
-      <article class="rounded-[20px] bg-white p-5 shadow-[0_1px_7px_rgba(12,12,13,0.1)]">
+      <article class="rounded-[20px] bg-white pl-[38px] pr-[26.62px] pt-5 pb-6 shadow-[0_1px_7px_rgba(12,12,13,0.1)]">
         <div class="flex items-center justify-between">
           <h3 class="text-sm font-medium text-[#34373C]">Total Leads</h3>
-          <span class="rounded-[3px] bg-[#021717] px-2 py-[2px] text-[9px] font-medium text-white">View</span>
+          <span class="rounded-[3px] bg-[#5E5D5D] px-2 py-[2px] text-[9px] font-medium text-white">View</span>
         </div>
         <p class="mt-7 text-[50px] leading-[0.86] font-medium text-[#34373C]">
           4,100 <span class="text-[15px] font-semibold">Leads</span>
         </p>
+
+        <div class="image-wrapper mt-4">
+          <img class="w-full" src="@/assets/svg/barchart.svg" alt="bar chart">
+        </div>
+
       </article>
 
-      <article class="rounded-[20px] bg-white p-5 shadow-[0_1px_7px_rgba(12,12,13,0.1)]">
+      <article class="lead-pipeline rounded-[20px] bg-white p-5 shadow-[0_1px_7px_rgba(12,12,13,0.1)]">
         <div class="flex items-center justify-between">
           <h3 class="text-sm font-medium text-[#34373C]">Leads Pipeline</h3>
-          <span class="rounded-[3px] bg-[#FD46E8] px-2 py-[2px] text-[9px] font-medium text-white">57%</span>
+          <span class="rounded-[3px] bg-[#5E5D5D] px-2 py-[2px] text-[9px] font-medium text-white">View</span>
         </div>
-        <div class="mt-7">
-          <div class="flex h-4 gap-2 rounded-full bg-[#F5F5F5] p-[3px]">
-            <span class="h-full w-[35%] rounded-full bg-[#021717]" />
-            <span class="h-full w-[49%] rounded-full bg-[#FD46E8]" />
-          </div>
-          <div class="mt-1 flex gap-10 text-[10px] text-[#616263]">
-            <small>Contacted</small>
-            <small>Qualify</small>
+
+        <div class="mt-7 flex items-end gap-2">
+          <div
+            v-for="stage in pipelineStages"
+            :key="stage.label"
+            class="flex flex-1 flex-col"
+          >
+            <div class="flex justify-start">
+              <span
+                class="rounded-[4px] px-[8px] py-[3px] text-[10px] leading-none font-semibold text-white"
+                :style="{ backgroundColor: stage.accent }"
+              >
+                {{ stage.value }}%
+              </span>
+            </div>
+            <div class="relative mt-2 h-[74px]">
+              <span
+                class="absolute left-[6px] top-0 w-px bg-[#CFCFD1]"
+                :style="{ height: `${stage.stemHeight}px` }"
+              />
+              <span class="absolute left-[2px] top-[0] size-[9px] rounded-full bg-[#A0A2A6]" />
+              <span
+                class="absolute bottom-0 left-0 h-[12px] rounded-full transition-[width] duration-500 ease-out"
+                :style="{
+                  width: `${stage.value}%`,
+                  backgroundColor: stage.accent,
+                }"
+              />
+            </div>
+            <small class="mt-2 text-[10px] text-[#616263]">{{ stage.label }}</small>
           </div>
         </div>
       </article>
